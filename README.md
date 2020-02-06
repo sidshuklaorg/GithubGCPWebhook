@@ -2,8 +2,8 @@
 This webhook gets triggered when a repository gets created in 'sidshuklaorg'. 
 It does the following:
 
-*It automates the restrictions on the master branch*
-*Creates and issue and notifies the owner with restrictions*
+1. *It automates the restrictions on the master branch*
+1. *Creates and issue and notifies the owner with restrictions*
 
 The url of the webhook is :
 
