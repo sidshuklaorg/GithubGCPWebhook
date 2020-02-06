@@ -10,6 +10,10 @@ def githubfunc(request):
         `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
     """
     request_json = request.get_json()
+    if 'created' in request_json['action']:
+        print ('repo action is created')
+    else:
+        return ('repo action different than created')
     urlid = 'https://api.github.com/repos/sidshuklaorg/'
     nullobject = None
     booltrue = True
@@ -91,4 +95,4 @@ def githubfunc(request):
     
     
     
-    return ("type of data {}".format(type(request_json)))
+    return ("end of function execution")
