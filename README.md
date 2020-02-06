@@ -1,4 +1,4 @@
-# GithubGCPWebhook
+# Github GCP cloud function Webhook
 This webhook gets triggered when a repository gets created in 'sidshuklaorg'. 
 It does the following:
 
