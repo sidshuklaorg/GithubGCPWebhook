@@ -4,7 +4,7 @@ It does the following:
 
 1. *It automates the restrictions on the master branch*
 1. *It automates application of restriction on master branch*
-1. *I then creates an issue and notifies the owner with restrictions that have been applied on the branch*
+1. *It then creates an issue and notifies the owner with restrictions that have been applied on the branch*
 
 The url of the webhook is :
 
