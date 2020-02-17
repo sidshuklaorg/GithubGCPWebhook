@@ -1,6 +1,7 @@
 import json
 import requests
 import time
+import os
 def githubfunc(request):
   
     request_json = request.get_json()
@@ -8,7 +9,9 @@ def githubfunc(request):
         print ('repo action is created')
     else:
         return ('repo action different than created')
-    urlid = 'https://api.github.com/repos/sidshuklaorg/'
+    #urlid = 'https://api.github.com/repos/sidshuklaorg/'
+    urlid = os.environ.get('REPO_BASE_URL')
+    authtoken = os.environ.get('AUTH_TOKEN')
     nullobject = None
     booltrue = True
     """ print (request)"""
@@ -41,7 +44,7 @@ def githubfunc(request):
     """ ------------------------------------ create permissions on the master branch -----------------------------"""
     
     headers = {
-        "Authorization": "Token 4038b25f6c8182b795cc5d303223da3c1e3443fb",
+        "Authorization": authtoken,
         "Content-Type": "application/json",
         "Accept": "application/vnd.github.luke-cage-preview+json"
     }
@@ -90,7 +93,7 @@ def githubfunc(request):
     
     owner = '@' + request_json['repository']['owner']['login']
     headers = {
-        "Authorization": "Basic c2lkc2h1a2xhLWdpdGh1YjpBY3RpdmUwMDAk",
+        "Authorization": authtoken,
         "Content-Type": "application/json"
     }
       # Create our issue
