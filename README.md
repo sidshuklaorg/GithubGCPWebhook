@@ -21,11 +21,9 @@ https://us-central1-automlproject-242700.cloudfunctions.net/GitHubWebhook
 
 ## Considerations:
 
-1. At the moment, the webhook cloud function is configured to allow un-authenticated invocations, but in next release, additional         measures would be put on to increase security.
+1. At the moment, the webhook cloud function is configured to allow un-authenticated invocations, but in future release, additional         measures could be applied to increase security.
 1. There could be more robust exception handling in future release
 1. The fucntion returns appropraite message string based on the execution path at runtime
-1. Some of the variables used in this code could well be replaced with environment variables
-1. Authorization used to call github APIs is Basic with bearer token. This could be further enhanced to use Oauth mechanism
 
 
 
