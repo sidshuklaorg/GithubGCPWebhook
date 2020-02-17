@@ -11,7 +11,7 @@ https://us-central1-automlproject-242700.cloudfunctions.net/GitHubWebhook
 ## Runtime Variables
 
 1. AUTH_TOKEN - is the authorized Github API access token. In this example, it uses a Personal access token (PAT)
-1. REPO_BASE_URL - is the repository base url (https://api.github.com/repos/<orguser>/)
+1. REPO_BASE_URL - is the repository base url (https://api.github.com/repos/orguser/)
 
 ## Key behavior
 
