@@ -1,14 +1,8 @@
 import json
 import requests
+import time
 def githubfunc(request):
-    """Responds to any HTTP request.
-    Args:
-        request (flask.Request): HTTP request object.
-    Returns:
-        The response text or any set of values that can be turned into a
-        Response object using
-        `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
-    """
+  
     request_json = request.get_json()
     if 'created' in request_json['action']:
         print ('repo action is created')
@@ -23,17 +17,40 @@ def githubfunc(request):
     """ print (request_json['repository']['owner']['login']) """
     comurl = urlid+ request_json['repository']['name']+'/issues'
     permposturl = urlid + request_json['repository']['name'] + '/branches/master/protection'
+    print('url for protection of branch is' + permposturl)
+    
+    """ ----------making explicit delay, as an issue was observed possibly due to a race condition """
+    time.sleep(10)
+    
+    """  --------------   GET call to test if the branch has been created and has any restriction  """
+    
+    """
+    
+    headers = {
+    "Authorization" : "Token 4038b25f6c8182b795cc5d303223da3c1e3443fb",
+      "Content-Type": "application/json",
+        "Accept": "application/vnd.github.luke-cage-preview+json"  
+    }
+    geturl = 'https://api.github.com/repos/sidshuklaorg/test/branches/master/protection'
+    response = requests.request("GET", permposturl, headers=headers)
+    print (response.status_code)
+    print ('Response of get call ', response.content)
+    
+    """
     
     """ ------------------------------------ create permissions on the master branch -----------------------------"""
     
     headers = {
-        "Authorization": "Basic c2lkc2h1a2xhLWdpdGh1YjpBY3RpdmUwMDAk",
+        "Authorization": "Token 4038b25f6c8182b795cc5d303223da3c1e3443fb",
         "Content-Type": "application/json",
         "Accept": "application/vnd.github.luke-cage-preview+json"
     }
       # Create our payload
     data = {
-  "required_status_checks": None,
+  "required_status_checks": {
+                "strict": False,
+                "contexts": []
+            },
   "enforce_admins": booltrue,
   "required_pull_request_reviews": {
     "dismiss_stale_reviews": booltrue,
@@ -53,6 +70,7 @@ def githubfunc(request):
   "allow_deletions": booltrue
 }
 
+    
     payload = json.dumps(data)
 
     # Make the post call to add permissions
@@ -76,12 +94,12 @@ def githubfunc(request):
         "Content-Type": "application/json"
     }
       # Create our issue
-    data = {
- 			 "title": "Found a bug",
-			  "body": owner + " " + permresponse
+    issuedata = {
+ 			 "title": "Restrictions applied on master branch",
+			  "body": owner + "  . restrictions applied on master is as follows:         "   + payload
 			}
 
-    payload = json.dumps(data)
+    payload = json.dumps(issuedata)
 
     # Add the issue to our repository
     response = requests.request("POST", comurl, data=payload, headers=headers)
